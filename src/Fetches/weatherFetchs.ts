@@ -1,17 +1,20 @@
-import { Location } from '@Types/Location'
-import { Prediction } from '@Types/Prediction'
-import { LocationDetail } from '@Types/LocationDetails'
-
-const META_WEATHER_ROOT_API_URL = 'https://www.metaweather.com/api'
+import { Location } from '../Types/Location'
+import { LocationDetail } from '../Types/LocationDetails'
 
 export const searchLocation = async (query: string): Promise<Location[]> => {
-  const response = await fetch(`${META_WEATHER_ROOT_API_URL}/location/search/?query=${encodeURIComponent(query)}`)
+  const response = await fetch(`/api/location/search/?query=${encodeURIComponent(query)}`)
+  if (response.ok) {
+    return (await response.json()) as Location[]
+  }
 
-  return (await response.json()) as Location[]
+  return []
 }
 
-export const getPredition = async (woeid: string): Promise<LocationDetail> => {
-  const response = await fetch(`${META_WEATHER_ROOT_API_URL}/location/woeid/`)
+export const getLocationDetails = async (woeid: number): Promise<LocationDetail> => {
+  const response = await fetch(`/api/location/${woeid}/`)
+  if (response.ok) {
+    return (await response.json()) as LocationDetail
+  }
 
-  return (await response.json()) as LocationDetail
+  throw await response.json()
 }

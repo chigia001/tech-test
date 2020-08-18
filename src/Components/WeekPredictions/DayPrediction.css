@@ -1,0 +1,15 @@
+.dayPrediction {
+  display: grid;
+  justify-content: center;
+  grid-gap: 0.25rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.dayPrediction .dayPrediction__unknownWeatherState {
+  font-size: var(--imageSize);
+}
+.dayPrediction .dayPrediction__weatherState{
+  width: var(--imageSize);
+  height: var(--imageSize);
+}
